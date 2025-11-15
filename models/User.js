@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
 
+  // BASIC LOGIN
+  email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
 
-  // FACE
+  // FACE LOGIN
   faceRegistered: { type: Boolean, default: false },
-  faceEmbedding: { type: Array, default: [] },
+  faceEmbedding: { type: [Number], default: [] },
 
   // MULTIPLE WALLETS
   wallets: [
@@ -18,6 +19,10 @@ const userSchema = new mongoose.Schema({
       createdAt: { type: Date, default: Date.now }
     }
   ],
+
+  // ⭐ OTP LOGIN — (THE MISSING PART)
+  otp: { type: String, default: null },
+  otpExpires: { type: Number, default: null },
 
   createdAt: { type: Date, default: Date.now }
 });
